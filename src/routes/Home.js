@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Movie from '../components/Movie';
+import styles from './Home.module.css';
 
 function Home() {
   const [loading, setLoading] = useState(true);
@@ -17,11 +18,13 @@ function Home() {
     getMovies();
   }, []);
   return (
-    <div>
+    <div className={styles.container}>
       {loading ? (
-        <h1>Loading...</h1>
+        <div className={styles.loader}>
+          <span>Loading...</span>
+        </div>
       ) : (
-        <div>
+        <div className={styles.movies}>
           {movies.map((movie) => (
             <Movie
               key={movie.id}
@@ -30,6 +33,7 @@ function Home() {
               title={movie.title}
               summary={movie.summary}
               genres={movie.genres}
+              year={movie.year}
             />
           ))}
         </div>
@@ -39,7 +43,3 @@ function Home() {
 }
 
 export default Home;
-/*  [마지막 단계 : 코드 챌린지]
-- Home에서 해줬던 loading을 Detail에 해주기
-- movie가 State에 없음. 현재 API에서 json을 받아와서 아무것도 안 하고 있는 상태.
--> 힌트: json을 state에 넣어보기 */
